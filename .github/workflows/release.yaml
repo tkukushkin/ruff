@@ -2,8 +2,13 @@ name: "[ruff] Release"
 
 on:
   workflow_dispatch:
-  release:
-    types: [ published ]
+    tag:
+      description: "The version to tag, without the leading 'v'"
+      type: string
+  push:
+    paths:
+      # When we change pyproject.toml, we want to ensure that the maturin builds still work
+      - pyproject.toml
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -393,18 +398,27 @@ jobs:
       - linux-cross
       - musllinux
       - musllinux-cross
-    if: "startsWith(github.ref, 'refs/tags/')"
+    # If you don't set an input it's a practice run
+    if: "${{ inputs.tag }} != ''"
     environment:
       name: release
     permissions:
       # For pypi trusted publishing
       id-token: write
     steps:
+      - name: Consistency check
+        run: |
+          version=$(grep "version = " pyproject.toml | sed -e 's/version = "\(.*\)"/\1/g')
+          echo "${{ inputs.tag }}"
+          echo "${version}"
+          if [ "${{ inputs.tag }}" != "${version}" ]; then
+            exit 1
+          fi
       - uses: actions/download-artifact@v3
         with:
           name: wheels
           path: wheels
-      - name: "Publish to PyPi"
+      - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           skip-existing: true
@@ -414,10 +428,17 @@ jobs:
         with:
           name: binaries
           path: binaries
+      - name: git tag
+        run: |
+          git tag -m "v${{ inputs.tag }}" "v${{ inputs.tag }}"
+          # If there is duplicate tag, this will fail. The publish to pypi action will have been a noop (due to skip
+          # existing), so we make a non-destructive exit here
+          git push --tags
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: binaries/*
+          tag_name: v${{ inputs.tag }}
 
   # After the release has been published, we update downstream repositories
   # This is separate because if this fails the release is still fine, we just need to do some manual workflow triggers
