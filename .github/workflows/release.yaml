@@ -409,8 +409,9 @@ jobs:
       - name: Consistency check
         run: |
           version=$(grep "version = " pyproject.toml | sed -e 's/version = "\(.*\)"/\1/g')
-          echo "${{ inputs.tag }}"
-          echo "${version}"
+          echo "The input tag does not match the version from pyproject.toml:" >&2
+          echo "${{ inputs.tag }}" >&2
+          echo "${version}" >&2
           if [ "${{ inputs.tag }}" != "${version}" ]; then
             exit 1
           fi
