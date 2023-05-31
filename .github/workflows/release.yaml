@@ -402,16 +402,13 @@ jobs:
       - musllinux
       - musllinux-cross
     # If you don't set an input it's a practice run
-    if: "${{ inputs.tag }} != ''"
+    if: "${{ inputs.tag }} != null"
     environment:
       name: release
     permissions:
       # For pypi trusted publishing
       id-token: write
     steps:
-      - name: Checkout commit to be released
-        if: "${{ inputs.sha }} != ''"
-        run: git checkout ${{ inputs.sha }}
       - name: Consistency check
         run: |
           version=$(grep "version = " pyproject.toml | sed -e 's/version = "\(.*\)"/\1/g')
