@@ -3,7 +3,10 @@ name: "[ruff] Release"
 on:
   workflow_dispatch:
     tag:
-      description: "The version to tag, without the leading 'v'"
+      description: "The version to tag, without the leading 'v'. If not present, a dry run will be made"
+      type: string
+    sha:
+      description: "Optionally, the full sha of the commit to be released"
       type: string
   push:
     paths:
@@ -406,6 +409,9 @@ jobs:
       # For pypi trusted publishing
       id-token: write
     steps:
+      - name: Checkout commit to be released
+        if: "${{ inputs.sha }} != ''"
+        run: git checkout ${{ inputs.sha }}
       - name: Consistency check
         run: |
           version=$(grep "version = " pyproject.toml | sed -e 's/version = "\(.*\)"/\1/g')
