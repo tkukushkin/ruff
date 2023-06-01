@@ -68,16 +68,16 @@ def example8():
 ```diff
 --- Black
 +++ Ruff
-@@ -1,85 +1,55 @@
+@@ -1,85 +1,56 @@
 -x = 1
 -x = 1.2
+-
 +x = (1)
 +x = (1.2)
- 
  data = (
      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
  ).encode()
- 
+-
 -
  async def show_status():
      while True:
@@ -90,7 +90,7 @@ def example8():
 +               ).encode()
          except Exception as e:
              pass
--
+ 
  
  def example():
 -    return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
@@ -168,6 +168,8 @@ def example8():
  def example8():
 -    return None
 +    return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((None)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
++
++
 ```
 
 ## Ruff Output
@@ -175,11 +177,9 @@ def example8():
 ```py
 x = (1)
 x = (1.2)
-
 data = (
     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ).encode()
-
 async def show_status():
     while True:
         try:
@@ -189,6 +189,7 @@ async def show_status():
                ).encode()
         except Exception as e:
             pass
+
 
 def example():
     return (("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"))
@@ -228,6 +229,8 @@ def example7():
 
 def example8():
     return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((None)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+
 ```
 
 ## Black Output

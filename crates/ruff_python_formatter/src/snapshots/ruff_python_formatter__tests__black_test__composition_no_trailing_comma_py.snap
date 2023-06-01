@@ -266,7 +266,7 @@ class C:
          }, (
              "Not what we expected and the message is too long to fit in one line"
              " because it's too long"
-@@ -176,6 +176,6 @@
+@@ -176,6 +176,8 @@
                  key6: value6,
                  key7: value7,
                  key8: value8,
@@ -274,6 +274,8 @@ class C:
 +                key9: value9
              }
          )
++
++
 ```
 
 ## Ruff Output
@@ -460,6 +462,8 @@ class C:
                 key9: value9
             }
         )
+
+
 ```
 
 ## Black Output

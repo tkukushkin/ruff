@@ -105,9 +105,11 @@ def g():
 ```diff
 --- Black
 +++ Ruff
-@@ -3,9 +3,9 @@
+@@ -1,11 +1,9 @@
+ """Docstring."""
  
- # leading comment
+-
+-# leading comment
  def f():
 -    NO = ""
 -    SPACE = " "
@@ -118,7 +120,7 @@ def g():
  
      t = leaf.type
      p = leaf.parent  # trailing comment
-@@ -16,14 +16,19 @@
+@@ -16,14 +14,19 @@
      if t == token.COMMENT:  # another trailing comment
          return DOUBLESPACE
  
@@ -138,14 +140,15 @@ def g():
          if prevp.type == token.EQUAL:
              if prevp.parent and prevp.parent.type in {
                  syms.typedargslist,
-@@ -44,16 +49,14 @@
+@@ -43,17 +46,12 @@
+                 syms.dictsetmaker,
              }:
                  return NO
- 
 -
- ###############################################################################
- # SECTION BECAUSE SECTIONS
- ###############################################################################
+ 
+-###############################################################################
+-# SECTION BECAUSE SECTIONS
+-###############################################################################
 -
  
  def g():
@@ -158,7 +161,7 @@ def g():
  
      t = leaf.type
      p = leaf.parent
-@@ -67,7 +70,7 @@
+@@ -67,7 +65,7 @@
          return DOUBLESPACE
  
      # Another comment because more comments
@@ -167,6 +170,12 @@ def g():
  
      prev = leaf.prev_sibling
      if not prev:
+@@ -87,3 +85,5 @@
+                 syms.argument,
+             }:
+                 return NO
++
++
 ```
 
 ## Ruff Output
@@ -174,8 +183,6 @@ def g():
 ```py
 """Docstring."""
 
-
-# leading comment
 def f():
     NO = ''
     SPACE = ' '
@@ -223,9 +230,6 @@ def f():
             }:
                 return NO
 
-###############################################################################
-# SECTION BECAUSE SECTIONS
-###############################################################################
 
 def g():
     NO = ''
@@ -264,6 +268,8 @@ def g():
                 syms.argument,
             }:
                 return NO
+
+
 ```
 
 ## Black Output

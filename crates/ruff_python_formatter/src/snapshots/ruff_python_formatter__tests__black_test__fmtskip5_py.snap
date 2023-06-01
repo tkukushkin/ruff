@@ -22,7 +22,7 @@ else:
 ```diff
 --- Black
 +++ Ruff
-@@ -1,6 +1,6 @@
+@@ -1,9 +1,10 @@
 -a, b, c = 3, 4, 5
 +a, b, c = 3, 4,       5
  if (
@@ -31,6 +31,10 @@ else:
      and b    != 9  # fmt: skip
      and c is not None
  ):
+     print("I'm good!")
+ else:
+     print("I'm bad")
++
 ```
 
 ## Ruff Output
@@ -45,6 +49,7 @@ if (
     print("I'm good!")
 else:
     print("I'm bad")
+
 ```
 
 ## Black Output

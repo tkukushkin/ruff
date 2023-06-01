@@ -89,6 +89,29 @@ return np.divide(
  
  
  def function_dont_replace_spaces():
+@@ -29,7 +29,6 @@
+ p = {(k, k**2): v**2 for k, v in pairs}
+ q = [10**i for i in range(6)]
+ r = x**y
+-
+ a = 5.0**~4.0
+ b = 5.0 ** f()
+ c = -(5.0**2.0)
+@@ -47,9 +46,6 @@
+ o = settings(max_examples=10**6.0)
+ p = {(k, k**2): v**2.0 for k, v in pairs}
+ q = [10.5**i for i in range(6)]
+-
+-
+-# WE SHOULD DEFINITELY NOT EAT THESE COMMENTS (https://github.com/psf/black/issues/2873)
+ if hasattr(view, "sum_of_weights"):
+     return np.divide(  # type: ignore[no-any-return]
+         view.variance,  # type: ignore[union-attr]
+@@ -61,3 +57,4 @@
+ return np.divide(
+     where=view.sum_of_weights_of_weight_long**2 > view.sum_of_weights_squared,  # type: ignore
+ )
++
 ```
 
 ## Ruff Output
@@ -125,7 +148,6 @@ o = settings(max_examples=10**6)
 p = {(k, k**2): v**2 for k, v in pairs}
 q = [10**i for i in range(6)]
 r = x**y
-
 a = 5.0**~4.0
 b = 5.0 ** f()
 c = -(5.0**2.0)
@@ -143,9 +165,6 @@ n = count <= 10**5.0
 o = settings(max_examples=10**6.0)
 p = {(k, k**2): v**2.0 for k, v in pairs}
 q = [10.5**i for i in range(6)]
-
-
-# WE SHOULD DEFINITELY NOT EAT THESE COMMENTS (https://github.com/psf/black/issues/2873)
 if hasattr(view, "sum_of_weights"):
     return np.divide(  # type: ignore[no-any-return]
         view.variance,  # type: ignore[union-attr]
@@ -157,6 +176,7 @@ if hasattr(view, "sum_of_weights"):
 return np.divide(
     where=view.sum_of_weights_of_weight_long**2 > view.sum_of_weights_squared,  # type: ignore
 )
+
 ```
 
 ## Black Output

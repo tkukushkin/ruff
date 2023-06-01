@@ -42,15 +42,16 @@ assert (
 ```diff
 --- Black
 +++ Ruff
-@@ -1,58 +1,29 @@
--importA
+@@ -1,58 +1,36 @@
+ importA
 -(
 -    ()
 -    << 0
 -    ** 101234234242352525425252352352525234890264906820496920680926538059059209922523523525
 -)  #
-+importA;() << 0 ** 101234234242352525425252352352525234890264906820496920680926538059059209922523523525 #
  
++() << 0 ** 101234234242352525425252352352525234890264906820496920680926538059059209922523523525
++
  assert sort_by_dependency(
      {
 -        "1": {"2", "3"},
@@ -66,10 +67,11 @@ assert (
  ) == ["2a", "2b", "2", "3a", "3b", "3", "1"]
  
  importA
--0
++
+ 0
 -0 ^ 0  #
--
-+0;0^0#
+ 
++0^0
  
  class A:
      def foo(self):
@@ -78,8 +80,8 @@ assert (
 +            aaaaaaaaaaaaaaaaaaa = bbbbbbbbbbbbbbb.cccccccccc(  # pylint: disable=no-member
                  xxxxxxxxxxxx
 -            )  # pylint: disable=no-member
--
 +            )
+ 
  
  def test(self, othr):
 -    return 1 == 2 and (
@@ -104,22 +106,25 @@ assert (
 +    return (1 == 2 and
 +            (name, description, self.default, self.selected, self.auto_generated, self.parameters, self.meta_data, self.schedule) ==
 +            (name, description, othr.default, othr.selected, othr.auto_generated, othr.parameters, othr.meta_data, othr.schedule))
++
  
++assert (
++    a_function(very_long_arguments_that_surpass_the_limit, which_is_eighty_eight_in_this_case_plus_a_bit_more)
++    == {"x": "this need to pass the line limit as well", "b": "but only by a little bit"}
++)
  
 -assert a_function(
 -    very_long_arguments_that_surpass_the_limit,
 -    which_is_eighty_eight_in_this_case_plus_a_bit_more,
 -) == {"x": "this need to pass the line limit as well", "b": "but only by a little bit"}
-+assert (
-+    a_function(very_long_arguments_that_surpass_the_limit, which_is_eighty_eight_in_this_case_plus_a_bit_more)
-+    == {"x": "this need to pass the line limit as well", "b": "but only by a little bit"}
-+)
 ```
 
 ## Ruff Output
 
 ```py
-importA;() << 0 ** 101234234242352525425252352352525234890264906820496920680926538059059209922523523525 #
+importA
+
+() << 0 ** 101234234242352525425252352352525234890264906820496920680926538059059209922523523525
 
 assert sort_by_dependency(
     {
@@ -129,7 +134,10 @@ assert sort_by_dependency(
 ) == ["2a", "2b", "2", "3a", "3b", "3", "1"]
 
 importA
-0;0^0#
+
+0
+
+0^0
 
 class A:
     def foo(self):
@@ -137,6 +145,7 @@ class A:
             aaaaaaaaaaaaaaaaaaa = bbbbbbbbbbbbbbb.cccccccccc(  # pylint: disable=no-member
                 xxxxxxxxxxxx
             )
+
 
 def test(self, othr):
     return (1 == 2 and
@@ -148,6 +157,7 @@ assert (
     a_function(very_long_arguments_that_surpass_the_limit, which_is_eighty_eight_in_this_case_plus_a_bit_more)
     == {"x": "this need to pass the line limit as well", "b": "but only by a little bit"}
 )
+
 ```
 
 ## Black Output

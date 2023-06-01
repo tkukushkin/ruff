@@ -20,26 +20,16 @@ print("hello, world")
 ```diff
 --- Black
 +++ Ruff
-@@ -1 +1,7 @@
-+\
-+
-+
-+
-+
-+
+@@ -1 +1,2 @@
  print("hello, world")
++
 ```
 
 ## Ruff Output
 
 ```py
-\
-
-
-
-
-
 print("hello, world")
+
 ```
 
 ## Black Output

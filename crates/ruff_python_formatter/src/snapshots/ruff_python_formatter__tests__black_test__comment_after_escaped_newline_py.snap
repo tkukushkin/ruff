@@ -22,7 +22,7 @@ def bobtwo(): \
 ```diff
 --- Black
 +++ Ruff
-@@ -1,6 +1,9 @@
+@@ -1,6 +1,11 @@
 -def bob():  # pylint: disable=W9016
 +def bob(): \
 +         # pylint: disable=W9016
@@ -34,6 +34,8 @@ def bobtwo(): \
 +    \
 +  # some comment here
      pass
++
++
 ```
 
 ## Ruff Output
@@ -48,6 +50,8 @@ def bobtwo(): \
     \
   # some comment here
     pass
+
+
 ```
 
 ## Black Output

@@ -234,7 +234,7 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
 ```diff
 --- Black
 +++ Ruff
-@@ -1,83 +1,84 @@
+@@ -1,83 +1,85 @@
  class MyClass:
 +  """ Multiline
 +  class docstring
@@ -302,12 +302,12 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
 -    docstring
 -    """
 -    pass
--
 +        """Another
 +        multiline
 +        docstring
 +        """
 +        pass
+ 
  
  def poit():
 -    """
@@ -368,7 +368,7 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
      pass
  
  
-@@ -88,25 +89,30 @@
+@@ -88,25 +90,30 @@
  
  
  def that():
@@ -406,7 +406,7 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
  
  
  def empty():
-@@ -114,46 +120,43 @@
+@@ -114,12 +121,11 @@
  
  
  def single_quotes():
@@ -422,15 +422,13 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
  
  
  def ignored_docstring():
-     """a => \
--b"""
--
-+b"""  
+@@ -128,32 +134,32 @@
+ 
  
  def single_line_docstring_with_whitespace():
 -    """This should be stripped"""
--
 +    """   This should be stripped """
+ 
  
  def docstring_with_inline_tabs_and_space_indentation():
      """hey
@@ -472,7 +470,7 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
  
  
  def backslash_space():
-@@ -161,16 +164,15 @@
+@@ -161,34 +167,32 @@
  
  
  def multiline_backslash_1():
@@ -489,11 +487,11 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
 +  '''
 +  hey there \ '''
  
--
- # Regression test for #3425
+ 
+-# Regression test for #3425
  def multiline_backslash_really_long_dont_crash():
      """
-@@ -178,8 +180,8 @@
+     hey there hello guten tag hi hoow are you ola zdravstvuyte ciao como estas ca va \ """
  
  
  def multiline_backslash_3():
@@ -504,16 +502,17 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
  
  
  def my_god_its_full_of_stars_1():
-@@ -188,7 +190,7 @@
+     "I'm sorry Dave\u2001"
  
- # the space below is actually a \u2001, removed in output
+ 
+-# the space below is actually a \u2001, removed in output
  def my_god_its_full_of_stars_2():
 -    "I'm sorry Dave"
 +    "I'm sorry Dave "
  
  
  def docstring_almost_at_line_limit():
-@@ -213,7 +215,7 @@
+@@ -213,7 +217,9 @@
  
  
  def stable_quote_normalization_with_immediate_inner_single_quote(self):
@@ -523,6 +522,8 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
      <text here, since without another non-empty line black is stable>
 -    """
 +    '''
++
++
 ```
 
 ## Ruff Output
@@ -573,6 +574,7 @@ def zort():
         docstring
         """
         pass
+
 
 def poit():
   """
@@ -659,10 +661,12 @@ def believe_it_or_not_this_is_in_the_py_stdlib(): '''
 
 def ignored_docstring():
     """a => \
-b"""  
+b"""
+
 
 def single_line_docstring_with_whitespace():
     """   This should be stripped """
+
 
 def docstring_with_inline_tabs_and_space_indentation():
     """hey
@@ -703,7 +707,7 @@ def multiline_backslash_2():
   '''
   hey there \ '''
 
-# Regression test for #3425
+
 def multiline_backslash_really_long_dont_crash():
     """
     hey there hello guten tag hi hoow are you ola zdravstvuyte ciao como estas ca va \ """
@@ -718,7 +722,6 @@ def my_god_its_full_of_stars_1():
     "I'm sorry Dave\u2001"
 
 
-# the space below is actually a \u2001, removed in output
 def my_god_its_full_of_stars_2():
     "I'm sorry Dave "
 
@@ -749,6 +752,8 @@ def stable_quote_normalization_with_immediate_inner_single_quote(self):
 
     <text here, since without another non-empty line black is stable>
     '''
+
+
 ```
 
 ## Black Output
