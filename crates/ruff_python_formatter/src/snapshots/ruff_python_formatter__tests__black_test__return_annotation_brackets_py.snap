@@ -101,7 +101,7 @@ def foo() -> tuple[int, int, int,]:
 ```diff
 --- Black
 +++ Ruff
-@@ -1,120 +1,70 @@
+@@ -1,120 +1,80 @@
  # Control
  def double(a: int) -> int:
 -    return 2 * a
@@ -118,22 +118,22 @@ def foo() -> tuple[int, int, int,]:
  # Some newline variations
 -def double(a: int) -> int:
 -    return 2 * a
--
--
--def double(a: int) -> int:
--    return 2 * a
--
--
--def double(a: int) -> int:
--    return 2 * a
--
--
 +def double(a: int) -> (
 +    int):
 +    return 2*a
+ 
 +def double(a: int) -> (int
 +):
 +    return 2*a
+ 
+-def double(a: int) -> int:
+-    return 2 * a
+-
+-
+-def double(a: int) -> int:
+-    return 2 * a
+-
+-
 +def double(a: int) -> (
 +    int
 +):
@@ -141,16 +141,16 @@ def foo() -> tuple[int, int, int,]:
  # Don't lose the comments
 -def double(a: int) -> int:  # Hello
 -    return 2 * a
--
++def double(a: int) -> ( # Hello
++    int
++):
++    return 2*a
+ 
 -
 -def double(a: int) -> int:  # Hello
 -    return 2 * a
 -
 -
-+def double(a: int) -> ( # Hello
-+    int
-+):
-+    return 2*a
 +def double(a: int) -> (
 +    int # Hello
 +):
@@ -161,13 +161,13 @@ def foo() -> tuple[int, int, int,]:
  ):
      return 2
 -
--
+ 
 -def foo() -> (
 -    intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds
 -):
 +def foo() -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
      return 2
--
+ 
 -
 -def foo() -> (
 -    intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds
@@ -175,7 +175,7 @@ def foo() -> tuple[int, int, int,]:
 -):
 +def foo() -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds | intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
      return 2
--
+ 
 -
 -def foo(
 -    a: int,
@@ -184,7 +184,7 @@ def foo() -> tuple[int, int, int,]:
 -) -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
 +def foo(a: int, b: int, c: int,) -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
      return 2
--
+ 
 -
 -def foo(
 -    a: int,
@@ -212,14 +212,13 @@ def foo() -> tuple[int, int, int,]:
  # with *interesting* spacing
 -def double(a: int) -> int:
 -    return 2 * a
--
++def double(a: int) -> (((((int))))):
++    return 2*a
+ 
 -
 -def double(a: int) -> int:
 -    return 2 * a
 -
--
-+def double(a: int) -> (((((int))))):
-+    return 2*a
 +def double(a: int) -> (
 +    (  (
 +        ((int)
@@ -228,6 +227,7 @@ def foo() -> tuple[int, int, int,]:
 +            )
 +        ):
 +    return 2*a
+ 
  def foo() -> (
 +    (  (
      intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds
@@ -251,7 +251,7 @@ def foo() -> tuple[int, int, int,]:
 +    tuple[int, int, int]
  ):
      return 2
--
+ 
 -
 +def foo() -> tuple[loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong, loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong, loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong]:
 +    return 2
@@ -280,9 +280,11 @@ def double(a: int) -> (int):
 def double(a: int) -> (
     int):
     return 2*a
+
 def double(a: int) -> (int
 ):
     return 2*a
+
 def double(a: int) -> (
     int
 ):
@@ -292,6 +294,7 @@ def double(a: int) -> ( # Hello
     int
 ):
     return 2*a
+
 def double(a: int) -> (
     int # Hello
 ):
@@ -301,12 +304,16 @@ def foo() -> (
     intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds
 ):
     return 2
+
 def foo() -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
     return 2
+
 def foo() -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds | intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
     return 2
+
 def foo(a: int, b: int, c: int,) -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
     return 2
+
 def foo(a: int, b: int, c: int,) -> intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds | intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds:
     return 2
 # Split args but no need to split return
@@ -316,6 +323,7 @@ def foo(a: int, b: int, c: int,) -> int:
 # with *interesting* spacing
 def double(a: int) -> (((((int))))):
     return 2*a
+
 def double(a: int) -> (
     (  (
         ((int)
@@ -324,6 +332,7 @@ def double(a: int) -> (
             )
         ):
     return 2*a
+
 def foo() -> (
     (  (
     intsdfsafafafdfdsasdfsfsdfasdfafdsafdfdsfasdskdsdsfdsafdsafsdfdasfffsfdsfdsafafhdskfhdsfjdslkfdlfsdkjhsdfjkdshfkljds
@@ -335,6 +344,7 @@ def foo() -> (
     tuple[int, int, int]
 ):
     return 2
+
 def foo() -> tuple[loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong, loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong, loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong]:
     return 2
 # Magic trailing comma example

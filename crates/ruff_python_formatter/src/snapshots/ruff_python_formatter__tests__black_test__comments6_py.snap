@@ -131,11 +131,7 @@ aaaaaaaaaaaaa, bbbbbbbbb = map(list, map(itertools.chain.from_iterable, zip(*ite
 ```diff
 --- Black
 +++ Ruff
-@@ -1,18 +1,12 @@
- from typing import Any, Tuple
--
--
- def f(
+@@ -5,8 +5,6 @@
      a,  # type: int
  ):
      pass
@@ -144,77 +140,14 @@ aaaaaaaaaaaaa, bbbbbbbbb = map(list, map(itertools.chain.from_iterable, zip(*ite
  # test type comments
  def f(a, b, c, d, e, f, g, h, i):
      # type: (int, int, int, int, int, int, int, int, int) -> None
-     pass
--
--
- def f(
-     a,  # type: int
-     b,  # type: int
-@@ -26,8 +20,6 @@
- ):
-     # type: (...) -> None
-     pass
--
--
- def f(
-     arg,  # type: int
-     *args,  # type: *Any
-@@ -36,8 +28,6 @@
- ):
-     # type: (...) -> None
-     pass
--
--
- def f(
-     a,  # type: int
-     b,  # type: int
-@@ -67,22 +57,16 @@
-         + another_element
-         + another_element_with_long_name
-     )  # type: int
--
--
- def f(
-     x,  # not a type comment
-     y,  # type: int
- ):
-     # type: (...) -> None
-     pass
--
--
- def f(
-     x,  # not a type comment
- ):  # type: (int) -> None
-     pass
--
--
- def func(
-     a=some_list[0],  # type: int
- ):  # type: () -> int
-@@ -102,17 +86,12 @@
-     c = call(
-         "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa"  # type: ignore
-     )
--
--
- result = (  # aaa
-     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
- )
--
- AAAAAAAAAAAAA = [AAAAAAAAAAAAA] + SHARED_AAAAAAAAAAAAA + USER_AAAAAAAAAAAAA + AAAAAAAAAAAAA  # type: ignore
--
- call_to_some_function_asdf(
-     foo,
-     [AAAAAAAAAAAAAAAAAAAAAAA, AAAAAAAAAAAAAAAAAAAAAAA, AAAAAAAAAAAAAAAAAAAAAAA, BBBBBBBBBBBB],  # type: ignore
- )
--
- aaaaaaaaaaaaa, bbbbbbbbb = map(list, map(itertools.chain.from_iterable, zip(*items)))  # type: ignore[arg-type]
 ```
 
 ## Ruff Output
 
 ```py
 from typing import Any, Tuple
+
+
 def f(
     a,  # type: int
 ):
@@ -223,6 +156,8 @@ def f(
 def f(a, b, c, d, e, f, g, h, i):
     # type: (int, int, int, int, int, int, int, int, int) -> None
     pass
+
+
 def f(
     a,  # type: int
     b,  # type: int
@@ -236,6 +171,8 @@ def f(
 ):
     # type: (...) -> None
     pass
+
+
 def f(
     arg,  # type: int
     *args,  # type: *Any
@@ -244,6 +181,8 @@ def f(
 ):
     # type: (...) -> None
     pass
+
+
 def f(
     a,  # type: int
     b,  # type: int
@@ -273,16 +212,22 @@ def f(
         + another_element
         + another_element_with_long_name
     )  # type: int
+
+
 def f(
     x,  # not a type comment
     y,  # type: int
 ):
     # type: (...) -> None
     pass
+
+
 def f(
     x,  # not a type comment
 ):  # type: (int) -> None
     pass
+
+
 def func(
     a=some_list[0],  # type: int
 ):  # type: () -> int
@@ -302,14 +247,19 @@ def func(
     c = call(
         "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa", "aaaaaaaa"  # type: ignore
     )
+
+
 result = (  # aaa
     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 )
+
 AAAAAAAAAAAAA = [AAAAAAAAAAAAA] + SHARED_AAAAAAAAAAAAA + USER_AAAAAAAAAAAAA + AAAAAAAAAAAAA  # type: ignore
+
 call_to_some_function_asdf(
     foo,
     [AAAAAAAAAAAAAAAAAAAAAAA, AAAAAAAAAAAAAAAAAAAAAAA, AAAAAAAAAAAAAAAAAAAAAAA, BBBBBBBBBBBB],  # type: ignore
 )
+
 aaaaaaaaaaaaa, bbbbbbbbb = map(list, map(itertools.chain.from_iterable, zip(*items)))  # type: ignore[arg-type]
 ```
 

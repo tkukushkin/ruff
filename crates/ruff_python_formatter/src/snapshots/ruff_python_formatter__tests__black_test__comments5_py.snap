@@ -86,7 +86,7 @@ if __name__ == "__main__":
 ```diff
 --- Black
 +++ Ruff
-@@ -1,11 +1,6 @@
+@@ -1,10 +1,6 @@
  while True:
      if something.changed:
          do.stuff()  # trailing comment
@@ -94,26 +94,20 @@ if __name__ == "__main__":
 -    # This one belongs to the `while` block.
 -
 -    # Should this one, too?  I guess so.
--
+ 
  # This one is properly standalone now.
  
- for i in range(100):
-@@ -15,27 +10,18 @@
+@@ -15,7 +11,6 @@
  
      # then we do this
      print(i)
 -    # and finally we loop around
--
+ 
  with open(some_temp_file) as f:
      data = f.read()
--
- try:
-     with open(some_other_file) as w:
-         w.write(data)
- 
- except OSError:
+@@ -28,14 +23,9 @@
      print("problems")
--
+ 
  import sys
 -
 -
@@ -126,7 +120,7 @@ if __name__ == "__main__":
  # SECTION COMMENT
  
  
-@@ -47,8 +33,6 @@
+@@ -47,8 +37,6 @@
  @deco3
  def decorated1():
      ...
@@ -135,7 +129,7 @@ if __name__ == "__main__":
  # leading 1
  @deco1
  # leading 2
-@@ -56,18 +40,12 @@
+@@ -56,14 +44,10 @@
  # leading function comment
  def decorated1():
      ...
@@ -150,10 +144,6 @@ if __name__ == "__main__":
  # This comment should be split from `some_instruction` by two lines but isn't.
  def g():
      ...
--
--
- if __name__ == "__main__":
-     main()
 ```
 
 ## Ruff Output
@@ -162,6 +152,7 @@ if __name__ == "__main__":
 while True:
     if something.changed:
         do.stuff()  # trailing comment
+
 # This one is properly standalone now.
 
 for i in range(100):
@@ -171,14 +162,17 @@ for i in range(100):
 
     # then we do this
     print(i)
+
 with open(some_temp_file) as f:
     data = f.read()
+
 try:
     with open(some_other_file) as w:
         w.write(data)
 
 except OSError:
     print("problems")
+
 import sys
 # leading function comment
 def wat():
@@ -208,6 +202,8 @@ some_instruction
 # This comment should be split from `some_instruction` by two lines but isn't.
 def g():
     ...
+
+
 if __name__ == "__main__":
     main()
 ```

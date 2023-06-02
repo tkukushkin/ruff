@@ -109,18 +109,7 @@ async def wat():
 ```diff
 --- Black
 +++ Ruff
-@@ -8,27 +8,17 @@
- 
- Possibly also many, many lines.
- """
--
- import os.path
- import sys
--
- import a
- from b.c import X  # some noqa comment
--
- try:
+@@ -19,14 +19,9 @@
      import fast
  except ImportError:
      import slow as fast
@@ -132,14 +121,12 @@ async def wat():
 -    # some strings
 -    y  # type: ignore
 -)
--
--
 +# some strings
 +y  # type: ignore
- def function(default=None):
-     """Docstring comes first.
  
-@@ -45,12 +35,8 @@
+ 
+ def function(default=None):
+@@ -45,8 +40,6 @@
  
      # This return is also commented for some reason.
      return default
@@ -147,21 +134,8 @@ async def wat():
 -
  # Explains why we use global state.
  GLOBAL_STATE = {"a": a(1), "b": a(2), "c": a(3)}
--
--
- # Another comment!
- # This time two lines.
  
-@@ -73,8 +59,6 @@
- 
-         self.spam = 4
-         """Docstring for instance attribute spam."""
--
--
- #' <h1>This is pweave!</h1>
- 
- 
-@@ -93,4 +77,4 @@
+@@ -93,4 +86,4 @@
  
  # Some closing comments.
  # Maybe Vim or Emacs directives for formatting.
@@ -183,10 +157,13 @@ async def wat():
 
 Possibly also many, many lines.
 """
+
 import os.path
 import sys
+
 import a
 from b.c import X  # some noqa comment
+
 try:
     import fast
 except ImportError:
@@ -194,6 +171,8 @@ except ImportError:
 y = 1
 # some strings
 y  # type: ignore
+
+
 def function(default=None):
     """Docstring comes first.
 
@@ -212,6 +191,8 @@ def function(default=None):
     return default
 # Explains why we use global state.
 GLOBAL_STATE = {"a": a(1), "b": a(2), "c": a(3)}
+
+
 # Another comment!
 # This time two lines.
 
@@ -234,6 +215,8 @@ class Foo:
 
         self.spam = 4
         """Docstring for instance attribute spam."""
+
+
 #' <h1>This is pweave!</h1>
 
 

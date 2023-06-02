@@ -511,11 +511,10 @@ last_call()
  Ø = set()
  authors.łukasz.say_thanks()
  mapping = {
-@@ -233,138 +170,83 @@
-     C: 0.1 * (10.0 / 12),
+@@ -234,137 +171,84 @@
      D: 0.1 * (10.0 / 12),
  }
--
+ 
 -
  def gen():
      yield from outside_of_generator
@@ -523,10 +522,10 @@ last_call()
 -    b = yield
 -    c = yield
 -
--
 +    a = (yield)
 +    b = ((yield))
 +    c = (((yield)))
+ 
  async def f():
      await some.complicated[0].call(with_args=(True or (1 is not 1)))
 -
@@ -861,11 +860,13 @@ mapping = {
     C: 0.1 * (10.0 / 12),
     D: 0.1 * (10.0 / 12),
 }
+
 def gen():
     yield from outside_of_generator
     a = (yield)
     b = ((yield))
     c = (((yield)))
+
 async def f():
     await some.complicated[0].call(with_args=(True or (1 is not 1)))
 print(* [] or [1])

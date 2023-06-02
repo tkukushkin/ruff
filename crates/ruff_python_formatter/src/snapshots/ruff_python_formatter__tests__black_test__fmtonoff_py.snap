@@ -199,13 +199,10 @@ d={'a':1,
 ```diff
 --- Black
 +++ Ruff
-@@ -1,20 +1,17 @@
- #!/usr/bin/env python3
- import asyncio
- import sys
--
+@@ -4,17 +4,16 @@
+ 
  from third_party import X, Y, Z
--
+ 
 -from library import some_connection, some_decorator
 -
 +from library import some_connection, \
@@ -223,7 +220,7 @@ d={'a':1,
  
  # fmt: off
  def func_no_args():
-@@ -39,72 +36,41 @@
+@@ -39,34 +38,16 @@
  def function_signature_stress_test(number:int,no_annotation=None,text:str='default',* ,debug:bool=False,**kwargs) -> str:
   return text[number:-1]
  # fmt: on
@@ -261,10 +258,10 @@ d={'a':1,
      key: 'value',
  }
 -
--
+ 
  def subscriptlist():
      atom[
-         # fmt: off
+@@ -74,36 +55,28 @@
          'some big and',
          'complex subscript',
          # fmt: on
@@ -272,22 +269,22 @@ d={'a':1,
 -        andhere,
 -    ]
 -
--
 +        goes + here, andhere,
 +       ]
+ 
  def import_as_names():
      # fmt: off
      from hello import a,        b
      'unformatted'
 -    # fmt: on
 -
--
+ 
  def testlist_star_expr():
      # fmt: off
      a , b = *hello
      'unformatted'
 -    # fmt: on
--
+ 
 -
  def yield_expr():
      # fmt: off
@@ -301,11 +298,10 @@ d={'a':1,
      'unformatted'
 -    # fmt: on
 -
--
+ 
  def example(session):
      # fmt: off
-     result = session\
-@@ -113,9 +79,6 @@
+@@ -113,9 +86,6 @@
                  models.Customer.email == email_address)\
          .order_by(models.Customer.id.asc())\
          .all()
@@ -315,23 +311,23 @@ d={'a':1,
  def off_and_on_without_data():
      """All comments here are technically on the same prefix.
  
-@@ -123,12 +86,12 @@
+@@ -123,12 +93,12 @@
      """
      # fmt: off
  
 -    # hey, that won't work
  
+-    # fmt: on
+-    pass
 +        #hey, that won't work
-+
-+
-     # fmt: on
-     pass
--
--
+ 
+ 
++    # fmt: on
++    pass
  def on_and_off_broken():
      """Another known limitation."""
      # fmt: on
-@@ -137,21 +100,10 @@
+@@ -137,21 +107,10 @@
      and_=indeed . it  is  not  formatted
      because . the . handling . inside . generate_ignored_nodes()
      now . considers . multiple . fmt . directives . within . one . prefix
@@ -354,7 +350,7 @@ d={'a':1,
          )
          # fmt: off
          a = (
-@@ -182,24 +134,19 @@
+@@ -182,24 +141,19 @@
          re.MULTILINE|re.VERBOSE
          # fmt: on
      )
@@ -388,7 +384,7 @@ d={'a':1,
      # fmt: off
      xxxxxxx_xxxxxxxxxxxx={
          "xxxxxxxx": {
-@@ -214,7 +161,7 @@
+@@ -214,7 +168,7 @@
          },
      },
      # fmt: on
@@ -405,7 +401,9 @@ d={'a':1,
 #!/usr/bin/env python3
 import asyncio
 import sys
+
 from third_party import X, Y, Z
+
 from library import some_connection, \
                     some_decorator
 # fmt: off
@@ -450,6 +448,7 @@ something = {
     # fmt: off
     key: 'value',
 }
+
 def subscriptlist():
     atom[
         # fmt: off
@@ -458,14 +457,17 @@ def subscriptlist():
         # fmt: on
         goes + here, andhere,
        ]
+
 def import_as_names():
     # fmt: off
     from hello import a,        b
     'unformatted'
+
 def testlist_star_expr():
     # fmt: off
     a , b = *hello
     'unformatted'
+
 def yield_expr():
     # fmt: off
     yield hello
@@ -475,6 +477,7 @@ def yield_expr():
     # fmt: off
     ( yield hello )
     'unformatted'
+
 def example(session):
     # fmt: off
     result = session\

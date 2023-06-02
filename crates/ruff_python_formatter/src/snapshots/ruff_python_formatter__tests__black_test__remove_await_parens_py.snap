@@ -94,7 +94,7 @@ async def main():
 ```diff
 --- Black
 +++ Ruff
-@@ -1,93 +1,64 @@
+@@ -1,93 +1,73 @@
  import asyncio
 -
 -
@@ -107,15 +107,15 @@ async def main():
  async def main():
 -    await asyncio.sleep(1)
 -
--
 +    await (asyncio.sleep(1))
+ 
  async def main():
 -    await asyncio.sleep(1)
--
 -
 +    await (
 +        asyncio.sleep(1)
 +    )
+ 
  async def main():
 -    await asyncio.sleep(1)
 -
@@ -125,18 +125,18 @@ async def main():
  # Check comments
  async def main():
 -    await asyncio.sleep(1)  # Hello
--
--
 +    await (  # Hello
 +        asyncio.sleep(1)
 +    )
+ 
+-
  async def main():
 -    await asyncio.sleep(1)  # Hello
--
 -
 +    await (
 +        asyncio.sleep(1)  # Hello
 +    )
+ 
  async def main():
 -    await asyncio.sleep(1)  # Hello
 -
@@ -194,7 +194,7 @@ async def main():
  async def main():
      await (set_of_tasks | other_set)
 -
--
+ 
  async def main():
      await (await asyncio.sleep(1))
 -
@@ -203,21 +203,21 @@ async def main():
  async def main():
      await (await x)
 -
--
+ 
  async def main():
      await (yield x)
--
+ 
 -
  async def main():
 -    await (await asyncio.sleep(1))
 -
--
 +    await (await (asyncio.sleep(1)))
+ 
  async def main():
 -    await (await (await (await (await asyncio.sleep(1)))))
 -
--
 +    await (await (await (await (await (asyncio.sleep(1))))))
+ 
  async def main():
      await (yield)
 ```
@@ -232,10 +232,12 @@ async def main():
 # Remove brackets for short coroutine/task
 async def main():
     await (asyncio.sleep(1))
+
 async def main():
     await (
         asyncio.sleep(1)
     )
+
 async def main():
     await (asyncio.sleep(1)
     )
@@ -244,10 +246,12 @@ async def main():
     await (  # Hello
         asyncio.sleep(1)
     )
+
 async def main():
     await (
         asyncio.sleep(1)  # Hello
     )
+
 async def main():
     await (
         asyncio.sleep(1)
@@ -276,17 +280,22 @@ async def main():
 # Keep brackets around non power operations and nested awaits
 async def main():
     await (set_of_tasks | other_set)
+
 async def main():
     await (await asyncio.sleep(1))
 # It's awaits all the way down...
 async def main():
     await (await x)
+
 async def main():
     await (yield x)
+
 async def main():
     await (await (asyncio.sleep(1)))
+
 async def main():
     await (await (await (await (await (asyncio.sleep(1))))))
+
 async def main():
     await (yield)
 ```
